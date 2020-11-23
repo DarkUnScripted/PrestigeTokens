@@ -2,38 +2,40 @@ package net.darkunscripted.PrestigeTokens;
 
 import net.darkunscripted.PrestigeTokens.commands.PrestigeTokenCommand;
 import net.darkunscripted.PrestigeTokens.files.DataManager;
+import net.darkunscripted.PrestigeTokens.utils.Utils;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class Main extends JavaPlugin {
-
-    public static DataManager data;
-
+public class Main extends JavaPlugin implements Listener {
+    private DataManager cfgm;
     @Override
     public void onEnable() {
-        registerCommands();
-        registerManagers();
-        registerEvents();
-        saveConfig();
-        saveDefaultConfig();
+        loadConfigManager();
+        getCommand("prestigetoken").setExecutor(new PrestigeTokenCommand());
+
+        getServer().getConsoleSender().sendMessage(Utils.chat("&a\n\nExoPrestigeTokens has been enabled"));
+        loadConfig();
     }
 
     @Override
     public void onDisable() {
-        saveDefaultConfig();
+        getServer().getConsoleSender().sendMessage(Utils.chat("&c\n\nExoPrestigeTokens has been Disabled"));
     }
 
-    public void registerCommands(){
-        getCommand("prestigetoken").setExecutor(new PrestigeTokenCommand());
+    public void loadConfigManager(){
+        cfgm = new DataManager();
+        cfgm.setup();
+        cfgm.savePlayers();
+        cfgm.reloadPlayers();
     }
 
-    public void registerManagers(){
-        this.data = new DataManager(this);
-        data.saveDefaultConfig();
-
+    public void loadConfig(){
+        getConfig().options().copyDefaults(true);
+        saveConfig();
     }
 
-    public void registerEvents(){
-
+    public DataManager getManager(){
+        return cfgm;
     }
 
 }
