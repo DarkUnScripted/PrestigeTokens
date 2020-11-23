@@ -18,7 +18,7 @@ public class DataManager {
 
     public DataManager(Main plugin) {
         this.plugin = plugin;
-        saveDefaultConfig();
+        this.saveDefaultConfig();
     }
 
     public void reloadConfig(){
@@ -57,7 +57,7 @@ public class DataManager {
             this.configFile = new File(this.plugin.getDataFolder(), "prestigetokens.yml");
         }
         if(!this.configFile.exists()){
-            this.plugin.saveResource("prestigetokens.yml0", false);
+            this.plugin.saveResource("prestigetokens.yml", false);
         }
     }
 

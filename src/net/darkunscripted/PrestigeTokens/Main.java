@@ -28,6 +28,7 @@ public class Main extends JavaPlugin {
 
     public void registerManagers(){
         this.data = new DataManager(this);
+        data.saveDefaultConfig();
 
     }
 

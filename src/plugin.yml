@@ -1,9 +1,6 @@
-name: ExoPrestige Tokens
+name: ExoPrestigeTokens
 main: net.darkunscripted.PrestigeTokens.Main
 version: 1.0.0-Alpha
-
-depend:
-  -TokenEnchant
 
 commands:
   prestigetoken:
